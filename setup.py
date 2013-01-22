@@ -12,6 +12,7 @@ setup.py for multimechanize
 """
 
 import os
+import sys
 
 from setuptools import setup, find_packages
 
@@ -20,6 +21,11 @@ from multimechanize import __version__
 
 this_dir = os.path.abspath(os.path.dirname(__file__))
 
+extra_params = {}
+if sys.version_info >= (3,):
+    extra_params = {
+            'use_2to3': True,
+    }
 
 NAME = 'multi-mechanize'
 VERSION = __version__
@@ -64,7 +70,8 @@ params = dict(
     keywords=KEYWORDS,
     url=URL,
     classifiers=CLASSIFIERS,
-    entry_points = { 'console_scripts': CONSOLE_SCRIPTS }
+    entry_points = { 'console_scripts': CONSOLE_SCRIPTS },
+    **extra_params
 )
 
 setup(**params)
